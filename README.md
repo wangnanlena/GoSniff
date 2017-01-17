@@ -7,4 +7,11 @@ using gopacket libs as base.
 ##### Usage:
 -BPF syntax
 
-sudo ./gosniff --interface eth0 --sniff "tcp and port 80"
+* ./gosniff list-interfaces
+* sudo ./gosniff --interface eth0 --sniff "tcp and port 80"
+
+###### TODO
+* create our own packet data
+* create our own decoder
+* create diff options for this above
+
