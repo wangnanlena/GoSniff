@@ -24,8 +24,14 @@ var (
 func main() {
 
 	app := &cli.App{
-		Name:    "gosniff",
-		Version: "0.0.1",
+		Name:      "gosniff",
+		Version:   "0.0.1",
+		UsageText: "gosniff --interface eth0 --sniff \"tcp and port 80\"",
+		Authors: []*cli.Author{
+			{
+				Name:  "Fernandez,Chris ReK2",
+				Email: "cfernandez@protonmail.ch"},
+		},
 		Flags: []cli.Flag{
 
 			&cli.StringFlag{
@@ -58,8 +64,6 @@ func main() {
 				},
 			},
 		},
-		//UsageText: "gosniff --interface eth0 --sniff \"tcp and port 80\"",
-		//Authors:   []*cli.Author{{Name: "Fernandez,Chris ReK2", Email: "cfernandez@protonmail.ch"}},
 	}
 	app.Run(os.Args)
 }
