@@ -59,7 +59,8 @@ func main() {
 				Usage:       "sniff list-interfaces/sniff l",
 				Description: "list interfaces",
 				Action: func(c *cli.Context) error {
-					fmt.Printf("list interfaces")
+					fmt.Printf("listing interfaces:  ")
+					list_int()
 					return nil
 				},
 			},
@@ -90,4 +91,13 @@ func sniff(device string, suck string) string {
 		fmt.Println(packet)
 	}
 	return device
+}
+
+func list_int() {
+	var devices []pcap.Interface
+	devices, err := pcap.FindAllDevs()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(devices)
 }
