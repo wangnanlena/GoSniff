@@ -25,22 +25,42 @@ func main() {
 
 	app := &cli.App{
 		Name:    "gosniff",
-		Usage:   "gosniff --interface eth0 --sniff \"tcp and port 80\"",
 		Version: "0.0.1",
 		Flags: []cli.Flag{
-			&cli.StringFlag{Name: "interface, i", Value: "eth0", Usage: "the interface to use", Destination: &device},
-			&cli.StringFlag{Name: "sniff, s", Value: "tcp and port 443", Usage: "the BPF syntax parameters to sniff on", Destination: &suck},
+
+			&cli.StringFlag{
+				Name:        "interface",
+				Value:       "eth0",
+				Usage:       "the interface to use",
+				Destination: &device,
+			},
+			&cli.StringFlag{
+				Name:        "sniff",
+				Value:       "tcp and port 443",
+				Usage:       "the BPF syntax parameters to sniff on",
+				Destination: &suck,
+			},
 		},
 		Action: func(c *cli.Context) error {
 			fmt.Printf("Capturing on Interface %v\n", c.String("interface"))
 			sniff(device, suck)
 			return nil
 		},
-
-		UsageText: "app [first_arg] [second_arg]",
-		Authors:   []*cli.Author{{Name: "Fernandez,Chris ReK2", Email: "cfernandez@protonmail.ch"}},
+		Commands: []*cli.Command{
+			{
+				Name:        "list-interfaces",
+				Aliases:     []string{"l"},
+				Usage:       "sniff list-interfaces/sniff l",
+				Description: "list interfaces",
+				Action: func(c *cli.Context) error {
+					fmt.Printf("list interfaces")
+					return nil
+				},
+			},
+		},
+		//UsageText: "gosniff --interface eth0 --sniff \"tcp and port 80\"",
+		//Authors:   []*cli.Author{{Name: "Fernandez,Chris ReK2", Email: "cfernandez@protonmail.ch"}},
 	}
-
 	app.Run(os.Args)
 }
 
