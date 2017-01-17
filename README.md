@@ -9,6 +9,8 @@ using gopacket libs as base.
 
 * ./gosniff list-interfaces
 * sudo ./gosniff --interface eth0 --sniff "tcp and port 80"
+* sudo ./gosniff -i enp109s0f1 -p --sniff "tcp and not port 22"
+
 
 ###### TODO
 * create our own packet data
